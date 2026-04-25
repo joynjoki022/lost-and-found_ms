@@ -1,0 +1,24 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: mulila_frontend
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app
+      - ./node_modules:/usr/src/app/node_modules
+    networks:
+      - proxy
+    stdin_open: true
+    tty: true
+    command: sh -c "npm install && npm run dev"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mulila.rule=Host(`mulila.internal`)"
+      - "traefik.http.routers.mulila.entrypoints=websecure"
+      - "traefik.http.routers.mulila.tls=true"
+      - "traefik.http.services.mulila.loadbalancer.server.port=3000"
+networks:
+  proxy:
+    external: true
