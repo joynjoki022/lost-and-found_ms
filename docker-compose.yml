@@ -1,8 +1,8 @@
 version: "3.9"
 
 services:
-  mulila_governor:
-    container_name: mulila_governor
+  lost_and_found:
+    container_name: lost_and_found
     build: .
     restart: unless-stopped
 
@@ -11,10 +11,10 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mulila_governor.rule=Host(`mulila.pasbestventures.com`)"
-      - "traefik.http.routers.mulila_governor.entrypoints=websecure"
-      - "traefik.http.routers.mulila_governor.tls.certresolver=letsencrypt"
-      - "traefik.http.services.mulila_governor.loadbalancer.server.port=3000"
+      - "traefik.http.routers.lost_and_found.rule=Host(`lostandfound.pasbestventures.com`)"
+      - "traefik.http.routers.lost_and_found.entrypoints=websecure"
+      - "traefik.http.routers.lost_and_found.tls.certresolver=letsencrypt"
+      - "traefik.http.services.lost_and_found.loadbalancer.server.port=3000"
 
 networks:
   proxy:
