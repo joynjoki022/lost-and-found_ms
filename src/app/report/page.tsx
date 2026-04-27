@@ -6,6 +6,7 @@ import { ArrowLeft, Loader2, Sparkles, Shield, Zap, Brain, Search } from "lucide
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '../../../lib/supabase/client';
 import { useToast } from "@/hooks/useToast";
 
@@ -162,8 +163,8 @@ export default function ReportFoundPage() {
       // Upload image first
       const imageUrl = await uploadImage();
 
-      // Generate temporary user ID
-      const tempUserId = crypto.randomUUID();
+      // Replace crypto.randomUUID() with uuidv4()
+      const tempUserId = uuidv4();
 
       // Check if profile exists
       const { data: existingProfile } = await supabase
